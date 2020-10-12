@@ -24,6 +24,7 @@ namespace lab6
             f = Console.ReadLine();
             while (f == "1")
             {
+                item[numberOfItems] = new Item();
                 item[numberOfItems].read();
                 numberOfItems++;
                 Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы -нет)");
@@ -38,6 +39,7 @@ namespace lab6
             numberOfItems = numberOfItems1;
             for (i = 0; i < numberOfItems; i++)
             {
+                item[i] = new Item();
                 item[i].init(itemCode1[i], itemName1[i], itemPrice1[i], itemAmount1[i]);
             }
         }
@@ -55,6 +57,7 @@ namespace lab6
         }
         public void add()
         {
+            item[numberOfItems] = new Item();
             item[numberOfItems].read();
             numberOfItems++;
         }
