@@ -31,13 +31,13 @@ namespace lab6
                 f = Console.ReadLine();
             }
         }
-        public void init(string name1, string adress1, int numberOfItems1, string[] itemName1, string[] itemCode1, double[] itemPrice1, int[] itemAmount1)
+        public void init(string name, string adress, int numberOfItems, string[] itemName1, string[] itemCode1, double[] itemPrice1, int[] itemAmount1)
         {
             int i;
-            name = name1;
-            adress = adress1;
-            numberOfItems = numberOfItems1;
-            for (i = 0; i < numberOfItems; i++)
+            this.name = name;
+            this.adress = adress;
+            this.numberOfItems = numberOfItems;
+            for (i = 0; i < this.numberOfItems; i++)
             {
                 item[i] = new Item();
                 item[i].init(itemCode1[i], itemName1[i], itemPrice1[i], itemAmount1[i]);
@@ -61,25 +61,25 @@ namespace lab6
             item[numberOfItems].read();
             numberOfItems++;
         }
-        public void priceChange(string code1, double price1)
+        public void priceChange(string code, double price)
         {
             int i = 0;
             while (i < numberOfItems)
             {
-                if (item[i].Code == code1)
+                if (item[i].Code == code)
                 {
-                    item[i].Price = price1;
+                    item[i].Price = price;
                     i = numberOfItems;
                 }
                 i++;
             }
         }
-        public void amountChange(string code1, int amountDifference)
+        public void amountChange(string code, int amountDifference)
         {
             int i = 0;
             while (i < numberOfItems)
             {
-                if (item[i].Code == code1)
+                if (item[i].Code == code)
                 {
                     item[i].Amount = item[i].Amount + amountDifference;
                     i = numberOfItems;

@@ -29,12 +29,12 @@ namespace lab6
                 amount = Convert.ToInt32(Console.ReadLine());
             } while (amount < 0);
         }
-        public void init(string code1, string name1, double price1, int amount1)
+        public void init(string code, string name, double price, int amount)
         {
-            name = name1;
-            code = code1;
-            price = price1;
-            amount = amount1;
+            this.name = name;
+            this.code = code;
+            this.price = price;
+            this.amount = amount;
         }
         public void display()
         {
