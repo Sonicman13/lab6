@@ -112,5 +112,13 @@ namespace lab6
             }
             return newStore;
         }
+        public void getNumber(out int number)
+        {
+            number = numberOfItems;
+        }
+        public void getNumber1(ref int number)
+        {
+            number = numberOfItems;
+        }
     }
 }

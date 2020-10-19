@@ -59,7 +59,7 @@ namespace lab6
             i = 0;
             max = 1;
             f = "1";
-            while (f != "9")
+            while (f != "10")
             {
                 Console.WriteLine("Введите номер следующего действия:");
                 Console.WriteLine("1 - показать информацию о магазине");
@@ -70,7 +70,8 @@ namespace lab6
                 Console.WriteLine("6 - показать все магазины");
                 Console.WriteLine("7 - сменить магазин");
                 Console.WriteLine("8 - сложить магазины");
-                Console.WriteLine("9 - выйти");
+                Console.WriteLine("9 - показать колличество товаров");
+                Console.WriteLine("10 - выйти");
                 f = Console.ReadLine();
                 if (f == "1")
                 {
@@ -138,6 +139,22 @@ namespace lab6
                             store1[i] = store1[i] + store1[n];
                             n = max;
                         }
+                    }
+                }
+                else if (f == "9")
+                {
+                    Console.WriteLine("1 - out, 0 - ref");
+                    s = Console.ReadLine();
+                    if (s == "1")
+                    {
+                        store1[i].getNumber(out n);
+                        Console.WriteLine(n);
+                    }
+                    else
+                    {
+                        n = 1;
+                        store1[i].getNumber1(ref n);
+                        Console.WriteLine(n);
                     }
                 }
             }
