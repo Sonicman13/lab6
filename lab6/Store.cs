@@ -94,5 +94,23 @@ namespace lab6
                 return name;
             }
         }
+        public static Store operator + (Store store1, Store store2) {
+            int n, i;
+            Store newStore = new Store();
+            newStore.name = store1.name;
+            newStore.adress = store1.adress;
+            newStore.numberOfItems = store1.numberOfItems + store2.numberOfItems;
+            for (n = 0; n < store1.numberOfItems; n++)
+            {
+                newStore.item[n] = store1.item[n];
+            }
+            i = store1.numberOfItems;
+            for (n = 0; n < store2.numberOfItems; n++)
+            {
+                newStore.item[i] = store2.item[n];
+                i++;
+            }
+            return newStore;
+        }
     }
 }
