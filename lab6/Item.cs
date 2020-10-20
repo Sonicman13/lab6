@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab6
 {
-    class Item
+    struct Item
     {
         private string code;
         private string name;

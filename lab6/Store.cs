@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace lab6
 {
-    class Store
+    struct Store
     {
         private string name;
         private string adress;
         private int numberOfItems;
-        private Item[] item = new Item[10];
+        private Item[] item;
+        public Store(string name1, string adress1, int number1)
+        {
+            name = name1;
+            adress = adress1;
+            numberOfItems = number1;
+            item = new Item[10];
+        }
         public void read()
         {
             string f;

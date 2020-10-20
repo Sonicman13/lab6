@@ -20,7 +20,7 @@ namespace lab6
             string[] s1 = new string[10], itemCode = new string[10], itemName = new string[10];
             Console.WriteLine("Использовать или read чтобы ввести данные(1 - read, все остальные символы - init)");
             f = Console.ReadLine();
-            store1[0] = new Store();
+            store1[0] = new Store(" ", " ", 0);
             if (f == "1")
             {
                 store1[0].read();
@@ -102,7 +102,7 @@ namespace lab6
                 }
                 else if (f == "5")
                 {
-                    store1[max] = new Store();
+                    store1[max] = new Store(" ", " ", 0);
                     store1[max].read();
                     i = max;
                     max++;
