@@ -79,7 +79,7 @@ namespace lab6
                 }
                 else if (f == "2")
                 {
-                    store1[i].add();
+                    store1[i] = ++store1[i];
                 }
                 else if (f == "3")
                 {

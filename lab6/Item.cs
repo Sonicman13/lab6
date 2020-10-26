@@ -47,7 +47,10 @@ namespace lab6
         {
             set
             {
-                amount = value;
+                if(value > 0)
+                {
+                    amount = value;
+                }
             }
             get
             {
@@ -58,7 +61,10 @@ namespace lab6
         {
             set
             {
-                price = value;
+                if (value > 0)
+                {
+                    price = value;
+                }
             }
         }
         public string Code

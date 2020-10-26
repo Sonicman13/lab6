@@ -55,11 +55,21 @@ namespace lab6
                 item[i].display();
             }
         }
-        public void add()
+        public static Store operator ++ (Store store)
         {
-            item[numberOfItems] = new Item();
-            item[numberOfItems].read();
-            numberOfItems++;
+            Store newStore = new Store();
+            int n;
+            newStore.name = store.name;
+            newStore.adress = store.adress;
+            for (n = 0; n < store.numberOfItems; n++)
+            {
+                newStore.item[n] = new Item();
+                newStore.item[n] = store.item[n];
+            }
+            newStore.item[store.numberOfItems] = new Item();
+            newStore.item[store.numberOfItems].read();
+            newStore.numberOfItems = ++store.numberOfItems;
+            return newStore;
         }
         public void priceChange(string code, double price)
         {
