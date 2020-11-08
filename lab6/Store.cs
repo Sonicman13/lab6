@@ -32,7 +32,7 @@ namespace lab6
                 f = Console.ReadLine();
             }
         }
-        public void init(string name, string adress, int numberOfItems, string[] itemName1, string[] itemCode1, double[] itemPrice1, int[] itemAmount1)
+        public Store(string name, string adress, int numberOfItems, string[] itemName1, string[] itemCode1, double[] itemPrice1, int[] itemAmount1)
         {
             int i;
             if (numberOfItems < Store.maxNumberOfItems)
@@ -42,10 +42,21 @@ namespace lab6
                 this.numberOfItems = numberOfItems;
                 for (i = 0; i < this.numberOfItems; i++)
                 {
-                    item[i] = new Item();
-                    item[i].init(itemCode1[i], itemName1[i], itemPrice1[i], itemAmount1[i]);
+                    item[i] = new Item(itemCode1[i], itemName1[i], itemPrice1[i], itemAmount1[i]);
                 }
             }
+        }
+        public Store(string name)
+        {
+            this.name = name;
+            this.adress = "-";
+            this.numberOfItems = 0;
+        }
+        public Store()
+        {
+            this.name = "-";
+            this.adress = "-";
+            this.numberOfItems = 0;
         }
         public void display()
         {

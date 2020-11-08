@@ -20,41 +20,56 @@ namespace lab6
             string[] s1 = new string[10], itemCode = new string[10], itemName = new string[10];
             Console.WriteLine("Использовать или read чтобы ввести данные(1 - read, все остальные символы - init)");
             f = Console.ReadLine();
-            store1[0] = new Store();
             if (f == "1")
             {
+                store1[0] = new Store();
                 store1[0].read();
             }
             else
             {
-                Console.WriteLine("Введите название магазина");
-                name = Console.ReadLine();
-                Console.WriteLine("Введите адрес магазина");
-                adress = Console.ReadLine();
-                numberOfItems = 0; ;
-                Console.WriteLine("Добавить товар?(1-да,0-нет)");
+                Console.WriteLine("Ввести все параметры (1), только название (2), не вводить параметры(3)");
                 f = Console.ReadLine();
-                while (f == "1")
+                if (f == "1")
                 {
-                    Console.WriteLine("Введите название товара");
-                    itemName[numberOfItems] = Console.ReadLine();
-                    Console.WriteLine("Введите код товара");
-                    itemCode[numberOfItems] = Console.ReadLine();
-                    do
-                    {
-                        Console.WriteLine("Введите цену");
-                        itemPrice[numberOfItems] = Convert.ToDouble(Console.ReadLine());
-                    } while (itemPrice[numberOfItems] < 0);
-                    do
-                    {
-                        Console.WriteLine("Введите колличество товара");
-                        itemAmount[numberOfItems] = Convert.ToInt32(Console.ReadLine());
-                    } while (itemAmount[numberOfItems] < 0);
-                    numberOfItems++;
-                    Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
+                    Console.WriteLine("Введите название магазина");
+                    name = Console.ReadLine();
+                    Console.WriteLine("Введите адрес магазина");
+                    adress = Console.ReadLine();
+                    numberOfItems = 0; ;
+                    Console.WriteLine("Добавить товар?(1-да,0-нет)");
                     f = Console.ReadLine();
+                    while (f == "1")
+                    {
+                        Console.WriteLine("Введите название товара");
+                        itemName[numberOfItems] = Console.ReadLine();
+                        Console.WriteLine("Введите код товара");
+                        itemCode[numberOfItems] = Console.ReadLine();
+                        do
+                        {
+                            Console.WriteLine("Введите цену");
+                            itemPrice[numberOfItems] = Convert.ToDouble(Console.ReadLine());
+                        } while (itemPrice[numberOfItems] < 0);
+                        do
+                        {
+                            Console.WriteLine("Введите колличество товара");
+                            itemAmount[numberOfItems] = Convert.ToInt32(Console.ReadLine());
+                        } while (itemAmount[numberOfItems] < 0);
+                        numberOfItems++;
+                        Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
+                        f = Console.ReadLine();
+                    }
+                    store1[0] = new Store(name, adress, numberOfItems, itemName, itemCode, itemPrice, itemAmount);
                 }
-                store1[0].init(name, adress, numberOfItems, itemName, itemCode, itemPrice, itemAmount);
+                else if (f == "2")
+                {
+                    Console.WriteLine("Введите название магазина");
+                    name = Console.ReadLine();
+                    store1[0] = new Store(name);
+                }
+                else
+                {
+                    store1[0] = new Store();
+                }
             }
             i = 0;
             max = 1;
