@@ -21,12 +21,26 @@ namespace lab6
             do
             {
                 Console.WriteLine("Введите цену");
-                price = Convert.ToDouble(Console.ReadLine());
+                try
+                {
+                    price = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    price = -1;
+                }
             } while (price < 0);
             do
             {
                 Console.WriteLine("Введите колличество товара");
-                amount = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    amount = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    amount = -1;
+                }
             } while (amount < 0);
         }
         public Item(string code, string name, double price, int amount)

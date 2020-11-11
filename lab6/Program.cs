@@ -47,12 +47,25 @@ namespace lab6
                         do
                         {
                             Console.WriteLine("Введите цену");
-                            itemPrice[numberOfItems] = Convert.ToDouble(Console.ReadLine());
+                            try
+                            {
+                                itemPrice[numberOfItems] = Convert.ToDouble(Console.ReadLine());
+                            }
+                            catch (FormatException){
+                                itemPrice[numberOfItems] = -1;
+                            }
                         } while (itemPrice[numberOfItems] < 0);
                         do
                         {
                             Console.WriteLine("Введите колличество товара");
-                            itemAmount[numberOfItems] = Convert.ToInt32(Console.ReadLine());
+                            try
+                            {
+                                itemAmount[numberOfItems] = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                itemAmount[numberOfItems] = -1;
+                            }
                         } while (itemAmount[numberOfItems] < 0);
                         numberOfItems++;
                         Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
@@ -104,7 +117,14 @@ namespace lab6
                     do
                     {
                         Console.WriteLine("Введите новую цену");
-                        price = Convert.ToDouble(Console.ReadLine());
+                        try
+                        {
+                            price = Convert.ToDouble(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            price = -1;
+                        }
                     } while (price < 0);
                     store1[i].priceChange(code, price);
                 }
@@ -113,7 +133,14 @@ namespace lab6
                     Console.WriteLine("Введите код товара");
                     code = Console.ReadLine();
                     Console.WriteLine("Введите на сколько изменилось колличество товара(если увеличилость - положительное число, если уменьшилось - отрицательное)");
-                    amountDifference = Convert.ToInt32(Console.ReadLine());
+                    try
+                    {
+                        amountDifference = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (FormatException)
+                    {
+                        amountDifference = 0;
+                    }
                     store1[i].amountChange(code, amountDifference);
                 }
                 else if (f == "5")

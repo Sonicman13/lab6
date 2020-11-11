@@ -74,9 +74,14 @@ namespace lab6
         public static Store operator ++ (Store store)
         {
             Store newStore = new Store();
+            Exception a;
             int n;
-            if (store.numberOfItems < Store.maxNumberOfItems)
+            try
             {
+                if (store.numberOfItems >= Store.maxNumberOfItems)
+                {
+                    throw a = new Exception("0");
+                }
                 newStore.name = store.name;
                 newStore.adress = store.adress;
                 for (n = 0; n < store.numberOfItems; n++)
@@ -89,7 +94,10 @@ namespace lab6
                 newStore.numberOfItems = ++store.numberOfItems;
                 return newStore;
             }
-            else return store;
+            catch(Exception)
+            {
+                return store;
+            }
         }
         public void priceChange(string code, double price)
         {
@@ -127,8 +135,13 @@ namespace lab6
         public static Store operator + (Store store1, Store store2) {
             int n, i;
             Store newStore = new Store();
-            if (store1.numberOfItems + store2.numberOfItems <= Store.maxNumberOfItems)
+            Exception a;
+            try
             {
+                if (store1.numberOfItems + store2.numberOfItems > Store.maxNumberOfItems)
+                {
+                    throw a = new Exception("0");
+                }
                 newStore.name = store1.name;
                 newStore.adress = store1.adress;
                 newStore.numberOfItems = store1.numberOfItems + store2.numberOfItems;
@@ -144,7 +157,10 @@ namespace lab6
                 }
                 return newStore;
             }
-            else return store1;
+            catch (Exception)
+            {
+                return store1;
+            }
         }
         public void getNumber(out int number)
         {
