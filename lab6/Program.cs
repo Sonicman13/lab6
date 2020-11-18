@@ -10,10 +10,10 @@ namespace lab6
     {
         static void Main(string[] args)
         {
-            Store[] store1 = new Store[10];
+            Store[,] store1 = new Store[5, 10];
             Item[] item1 = new Item[10];
-            int amountDifference, numberOfItems, i, max, n;
-            int[] itemAmount = new int[10];
+            int amountDifference, numberOfItems, i, max, n, i1;
+            int[] itemAmount = new int[10], max1 = new int[10];
             double price;
             double[] itemPrice = new double[10];
             string f, s, code, name, adress;
@@ -22,8 +22,8 @@ namespace lab6
             f = Console.ReadLine();
             if (f == "1")
             {
-                store1[0] = new Store();
-                store1[0].read();
+                store1[0, 0] = new Store();
+                store1[0, 0].read();
             }
             else
             {
@@ -71,21 +71,22 @@ namespace lab6
                         Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
-                    store1[0] = new Store(name, adress, numberOfItems, itemName, itemCode, itemPrice, itemAmount);
+                    store1[0, 0] = new Store(name, adress, numberOfItems, itemName, itemCode, itemPrice, itemAmount);
                 }
                 else if (f == "2")
                 {
                     Console.WriteLine("Введите название магазина");
                     name = Console.ReadLine();
-                    store1[0] = new Store(name);
+                    store1[0, 0] = new Store(name);
                 }
                 else
                 {
-                    store1[0] = new Store();
+                    store1[0, 0] = new Store();
                 }
             }
             i = 0;
             max = 1;
+            max1[0] = 1;
             f = "1";
             while (f != "11")
             {
@@ -104,14 +105,23 @@ namespace lab6
                 f = Console.ReadLine();
                 if (f == "1")
                 {
-                    store1[i].display();
+                    Console.WriteLine("Сеть магазинов " + (i + 1));
+                    for (n = 0; n < max1[i]; n++)
+                    {
+                        Console.WriteLine("Магазин " + (n + 1));
+                        store1[i, n].display();
+                    }
                 }
                 else if (f == "2")
                 {
-                    store1[i] = ++store1[i];
+                    Console.WriteLine("Введите номер магазина");
+                    n = Convert.ToInt32(Console.ReadLine());
+                    store1[i, n-1] = ++store1[i, n-1];
                 }
                 else if (f == "3")
                 {
+                    Console.WriteLine("Введите номер магазина");
+                    n = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Введите код товара");
                     code = Console.ReadLine();
                     do
@@ -126,10 +136,12 @@ namespace lab6
                             price = -1;
                         }
                     } while (price < 0);
-                    store1[i].priceChange(code, price);
+                    store1[i, n-1].priceChange(code, price);
                 }
                 else if (f == "4")
                 {
+                    Console.WriteLine("Введите номер магазина");
+                    n = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Введите код товара");
                     code = Console.ReadLine();
                     Console.WriteLine("Введите на сколько изменилось колличество товара(если увеличилость - положительное число, если уменьшилось - отрицательное)");
@@ -141,46 +153,65 @@ namespace lab6
                     {
                         amountDifference = 0;
                     }
-                    store1[i].amountChange(code, amountDifference);
+                    store1[i, n-1].amountChange(code, amountDifference);
                 }
                 else if (f == "5")
                 {
-                    store1[max] = new Store();
-                    store1[max].read();
-                    i = max;
-                    max++;
+                    Console.WriteLine("Новая сеть магазинов (1), новый магазин в данной сети магазинов (2)");
+                    n = Convert.ToInt32(Console.ReadLine());
+                    if(n == 1)
+                    {
+                        store1[max, 0] = new Store();
+                        store1[max, 0].read();
+                        i = max;
+                        max++;
+                        max1[i] = 1;
+                    }
+                    else
+                    {
+                        store1[i, max1[i]] = new Store();
+                        store1[i, max1[i]].read();
+                        max1[i]++;
+                    }
 
                 }
                 else if (f == "6")
                 {
                     for (n = 0; n < max; n++)
                     {
-                        Console.WriteLine("Магазин:" + store1[n].Name);
+                        Console.WriteLine("Сеть магазинов " + (n + 1));
+                        for (i1 = 0; i1 < max1[n]; i1++)
+                        {
+                            Console.WriteLine("Магазин " + (i1 + 1));
+                            store1[n, i1].display();
+                        }
                     }
                 }
                 else if (f == "7")
                 {
-                    Console.WriteLine("Введите название магазина");
-                    name = Console.ReadLine();
-                    for (n = 0; n < max; n++)
-                    {
-                        if (store1[n].Name == name)
-                        {
-                            i = n;
-                            n = max;
-                        }
-                    }
+                    Console.WriteLine("Введите сеть магазинов");
+                    n = Convert.ToInt32(Console.ReadLine());
+                    i = n - 1;
                 }
                 else if (f == "8")
                 {
-                    Console.WriteLine("Введите название магазина");
+                    Console.WriteLine("Введите название магазина который надо изменить");
                     name = Console.ReadLine();
-                    for (n = 0; n < max; n++)
+                    for (n = 0; n < max1[i]; n++)
                     {
-                        if (store1[n].Name == name)
+                        if (name == store1[i, n].Name)
                         {
-                            store1[i] = store1[i] + store1[n];
-                            n = max;
+                            Console.WriteLine("Введите название магазина который надо прибавить");
+                            name = Console.ReadLine();
+                            for (i1 = 0; i1 < max1[i]; i1++)
+                            {
+                                if (name == store1[i, i1].Name)
+                                {
+                                    store1[i, n] = store1[i, n] + store1[n, i1];
+                                    i1 = max1[i];
+                                }
+                            }
+                            n = max1[i];
                         }
                     }
                 }
@@ -190,13 +221,13 @@ namespace lab6
                     s = Console.ReadLine();
                     if (s == "1")
                     {
-                        store1[i].getNumber(out n);
+                        store1[i, 0].getNumber(out n);
                         Console.WriteLine(n);
                     }
                     else
                     {
                         n = 1;
-                        store1[i].getNumber1(ref n);
+                        store1[i, 0].getNumber1(ref n);
                         Console.WriteLine(n);
                     }
                 }
