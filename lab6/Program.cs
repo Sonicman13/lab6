@@ -12,12 +12,14 @@ namespace lab6
         {
             Store[] store1 = new Store[10];
             Item[] item1 = new Item[10];
-            int amountDifference, numberOfItems, i, max, n;
-            int[] itemAmount = new int[10];
+            Game[] game1 = new Game[10];
+            Platform[] platform1 = new Platform[10];
+            int amountDifference, numberOfItems, i, max, n, numberOfGames, numberOfPlatforms, itemAmount, d;
+            int[] release = new int[3];
             double price;
-            double[] itemPrice = new double[10];
-            string f, s, code, name, adress;
-            string[] s1 = new string[10], itemCode = new string[10], itemName = new string[10];
+            double itemPrice;
+            string f, s, code, name, adress, itemCode, itemName, publisher;
+            string[] s1 = new string[10], platforms = new string[10], components = new string[10];
             Console.WriteLine("Использовать или read чтобы ввести данные(1 - read, все остальные символы - init)");
             f = Console.ReadLine();
             if (f == "1")
@@ -41,37 +43,143 @@ namespace lab6
                     while (f == "1")
                     {
                         Console.WriteLine("Введите название товара");
-                        itemName[numberOfItems] = Console.ReadLine();
+                        itemName = Console.ReadLine();
                         Console.WriteLine("Введите код товара");
-                        itemCode[numberOfItems] = Console.ReadLine();
+                        itemCode = Console.ReadLine();
                         do
                         {
                             Console.WriteLine("Введите цену");
                             try
                             {
-                                itemPrice[numberOfItems] = Convert.ToDouble(Console.ReadLine());
+                                itemPrice = Convert.ToDouble(Console.ReadLine());
                             }
                             catch (FormatException){
-                                itemPrice[numberOfItems] = -1;
+                                itemPrice = -1;
                             }
-                        } while (itemPrice[numberOfItems] < 0);
+                        } while (itemPrice < 0);
                         do
                         {
                             Console.WriteLine("Введите колличество товара");
                             try
                             {
-                                itemAmount[numberOfItems] = Convert.ToInt32(Console.ReadLine());
+                                itemAmount = Convert.ToInt32(Console.ReadLine());
                             }
                             catch (FormatException)
                             {
-                                itemAmount[numberOfItems] = -1;
+                                itemAmount = -1;
                             }
-                        } while (itemAmount[numberOfItems] < 0);
+                        } while (itemAmount < 0);
                         numberOfItems++;
+                        item1[numberOfItems] = new Item(itemName, itemCode, itemPrice, itemAmount);
                         Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
-                    store1[0] = new Store(name, adress, numberOfItems, itemName, itemCode, itemPrice, itemAmount);
+                    numberOfGames = 0;
+                    Console.WriteLine("Добавить игру?(1-да,0-нет)");
+                    f = Console.ReadLine();
+                    while (f == "1")
+                    {
+                        Console.WriteLine("Введите название игры");
+                        itemName = Console.ReadLine();
+                        Console.WriteLine("Введите код игры");
+                        itemCode = Console.ReadLine();
+                        do
+                        {
+                            Console.WriteLine("Введите цену");
+                            try
+                            {
+                                itemPrice = Convert.ToDouble(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                itemPrice = -1;
+                            }
+                        } while (itemPrice < 0);
+                        do
+                        {
+                            Console.WriteLine("Введите колличество товара");
+                            try
+                            {
+                                itemAmount = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                itemAmount = -1;
+                            }
+                        } while (itemAmount < 0);
+                        Console.WriteLine("Введите дату выхода(день, месяц(число), затем год(4 цифры), разделяя их нажатием Enter)");
+                        release[0] = Convert.ToInt32(Console.ReadLine());
+                        release[1] = Convert.ToInt32(Console.ReadLine());
+                        release[2] = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Введите платформы на которых доступна игра( чтобы закончить вводить платформы введите пустую строку)");
+                        d = -1;
+                        do
+                        {
+                            d++;
+                            platforms[d] = Console.ReadLine();
+                        } while (platforms[d] != "");
+                        Console.WriteLine("Введите издателя");
+                        publisher = Console.ReadLine();
+                        numberOfGames++;
+                        game1[numberOfGames] = new Game(itemName, itemCode, itemPrice, itemAmount, release, platforms, publisher);
+                        Console.WriteLine("Добавить еще одну игру?(1 - да, все остальные символы - нет)");
+                        f = Console.ReadLine();
+                    }
+                    numberOfPlatforms = 0;
+                    Console.WriteLine("Добавить консоль?(1-да,0-нет)");
+                    f = Console.ReadLine();
+                    while (f == "1")
+                    {
+                        Console.WriteLine("Введите название консоли");
+                        itemName = Console.ReadLine();
+                        Console.WriteLine("Введите код консоли");
+                        itemCode = Console.ReadLine();
+                        do
+                        {
+                            Console.WriteLine("Введите цену");
+                            try
+                            {
+                                itemPrice = Convert.ToDouble(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                itemPrice = -1;
+                            }
+                        } while (itemPrice < 0);
+                        do
+                        {
+                            Console.WriteLine("Введите колличество товара");
+                            try
+                            {
+                                itemAmount = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                itemAmount = -1;
+                            }
+                        } while (itemAmount < 0);
+                        Console.WriteLine("Введите комплектацию( чтобы закончить вводить комплектацию введите пустую строку)");
+                        d = -1;
+                        do
+                        {
+                            d++;
+                            components[d] = Console.ReadLine();
+                        } while (components[d] != "");
+                        Console.WriteLine("Введите платформы доступные по обратной совместимости( чтобы закончить вводить платформы введите пустую строку)");
+                        d = -1;
+                        do
+                        {
+                            d++;
+                            platforms[d] = Console.ReadLine();
+                        } while (platforms[d] != "");
+                        Console.WriteLine("Введите издателя");
+                        publisher = Console.ReadLine();
+                        numberOfPlatforms++;
+                        platform1[numberOfGames] = new Platform(itemName, itemCode, itemPrice, itemAmount, components, platforms, publisher);
+                        Console.WriteLine("Добавить еще одну консоль?(1 - да, все остальные символы - нет)");
+                        f = Console.ReadLine();
+                    }
+                    store1[0] = new Store(name, adress, numberOfItems, item1, numberOfGames, game1, numberOfPlatforms, platform1);
                 }
                 else if (f == "2")
                 {
