@@ -41,7 +41,7 @@ namespace lab6
             while (f == "1")
             {
                 game[numberOfGames] = new Game();
-                game[numberOfGames].read();
+                game[numberOfGames].read(1);
                 numberOfGames++;
                 Console.WriteLine("Добавить еще одну игру?(1 - да, все остальные символы -нет)");
                 f = Console.ReadLine();
@@ -52,7 +52,7 @@ namespace lab6
             while (f == "1")
             {
                 platform[numberOfPlatforms] = new Platform();
-                platform[numberOfPlatforms].read();
+                platform[numberOfPlatforms].read(1);
                 numberOfPlatforms++;
                 Console.WriteLine("Добавить еще одну консоль?(1 - да, все остальные символы -нет)");
                 f = Console.ReadLine();
@@ -135,6 +135,9 @@ namespace lab6
                 }
                 newStore.name = store.name;
                 newStore.adress = store.adress;
+                newStore.numberOfItems = store.numberOfItems;
+                newStore.numberOfGames = store.numberOfGames;
+                newStore.numberOfPlatforms = store.numberOfPlatforms;
                 for (n = 0; n < store.numberOfItems; n++)
                 {
                     newStore.item[n] = new Item();
@@ -161,13 +164,13 @@ namespace lab6
                 else if (f == "2")
                 {
                     newStore.game[store.numberOfGames] = new Game();
-                    newStore.game[store.numberOfGames].read();
+                    newStore.game[store.numberOfGames].read(1);
                     newStore.numberOfGames = ++store.numberOfGames;
                 }
                 else
                 {
                     newStore.platform[store.numberOfPlatforms] = new Platform();
-                    newStore.platform[store.numberOfPlatforms].read();
+                    newStore.platform[store.numberOfPlatforms].read(1);
                     newStore.numberOfPlatforms = ++store.numberOfPlatforms;
                 }
                 return newStore;
@@ -179,7 +182,8 @@ namespace lab6
         }
         public void priceChange(string code, double price)
         {
-            int i = 0, f = 0;
+            int i, f;
+            i = f = 0;
             while (i < numberOfItems)
             {
                 if (item[i].Code == code)
@@ -221,7 +225,8 @@ namespace lab6
         }
         public void amountChange(string code, int amountDifference)
         {
-            int i = 0, f = 0;
+            int i, f;
+            i = f = 0;
             while (i < numberOfItems)
             {
                 if (item[i].Code == code)
@@ -259,6 +264,7 @@ namespace lab6
                     }
                     i++;
                 }
+            }
         }
         public string Name
         {
@@ -330,6 +336,35 @@ namespace lab6
         public static void maxNumberOfItemsChange(int newMax)
         {
             Store.maxNumberOfItems = newMax;
+        }
+        public void add(string code)
+        {
+            int i, f;
+            i = f = 0;
+            while (i < numberOfGames)
+            {
+                if (game[i].Code == code)
+                {
+                    game[i].add();
+                    i = numberOfGames;
+                    f = 1;
+                }
+                i++;
+            }
+            if (f == 0)
+            {
+                i = 0;
+                while (i < numberOfPlatforms)
+                {
+                    if (platform[i].Code == code)
+                    {
+                        platform[i].add();
+                        i = numberOfPlatforms;
+                        f = 1;
+                    }
+                    i++;
+                }
+            }
         }
     }
 }

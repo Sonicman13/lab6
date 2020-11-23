@@ -69,8 +69,8 @@ namespace lab6
                                 itemAmount = -1;
                             }
                         } while (itemAmount < 0);
-                        numberOfItems++;
                         item1[numberOfItems] = new Item(itemName, itemCode, itemPrice, itemAmount);
+                        numberOfItems++;
                         Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
@@ -120,8 +120,8 @@ namespace lab6
                         } while (platforms[d] != "");
                         Console.WriteLine("Введите издателя");
                         publisher = Console.ReadLine();
-                        numberOfGames++;
                         game1[numberOfGames] = new Game(itemName, itemCode, itemPrice, itemAmount, release, platforms, publisher);
+                        numberOfGames++;
                         Console.WriteLine("Добавить еще одну игру?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
@@ -174,8 +174,8 @@ namespace lab6
                         } while (platforms[d] != "");
                         Console.WriteLine("Введите издателя");
                         publisher = Console.ReadLine();
+                        platform1[numberOfPlatforms] = new Platform(itemName, itemCode, itemPrice, itemAmount, components, platforms, publisher);
                         numberOfPlatforms++;
-                        platform1[numberOfGames] = new Platform(itemName, itemCode, itemPrice, itemAmount, components, platforms, publisher);
                         Console.WriteLine("Добавить еще одну консоль?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
@@ -206,8 +206,8 @@ namespace lab6
                 Console.WriteLine("6 - показать все магазины");
                 Console.WriteLine("7 - сменить магазин");
                 Console.WriteLine("8 - сложить магазины");
-                Console.WriteLine("9 - показать колличество товаров");
-                Console.WriteLine("10 - изменить колличество мест для товаров в магазине");
+                Console.WriteLine("9 - добавить комплектующие к консоли или платформы на которых доступна игра");
+                Console.WriteLine("10 - копирование");
                 Console.WriteLine("11 - выйти");
                 f = Console.ReadLine();
                 if (f == "1")
@@ -294,25 +294,24 @@ namespace lab6
                 }
                 else if (f == "9")
                 {
-                    Console.WriteLine("1 - out, 0 - ref");
-                    s = Console.ReadLine();
-                    if (s == "1")
-                    {
-                        store1[i].getNumber(out n);
-                        Console.WriteLine(n);
-                    }
-                    else
-                    {
-                        n = 1;
-                        store1[i].getNumber1(ref n);
-                        Console.WriteLine(n);
-                    }
+                    Console.WriteLine("Введите код товара");
+                    code = Console.ReadLine();
+                    store1[i].add(code);
                 }
                 else if (f == "10")
                 {
-                    Console.WriteLine("Введите колличество");
-                    numberOfItems = Convert.ToInt32(Console.ReadLine());
-                    Store.maxNumberOfItemsChange(numberOfItems);
+                    release[0] = release[1] = release[2] = 1;
+                    platforms[0] = "aaa";
+                    game1[0] = new Game("game", "game", 1, 1, release, platforms, "game");
+                    components[0] = "bbb";
+                    platforms[0] = "zzz";
+                    platform1[0] = new Platform("platform", "platform", 2, 2, components, platforms, "platform");
+                    game1[1] = game1[0];
+                    game1[1].Amount = 2;
+                    game1[0].display();
+                    platform1[1] = platform1[0];
+                    platform1[1].Amount = 3;
+                    platform1[0].display();
                 }
             }
         }

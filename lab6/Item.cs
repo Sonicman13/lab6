@@ -196,8 +196,14 @@ namespace lab6
         }
         public void add()
         {
+            int i;
+            i = 0;
+            while (platforms[i] != "")
+            {
+                i++;
+            }
             Console.WriteLine("Введите платформу на которой доступна игра");
-            platforms[platforms.Length] = Console.ReadLine();
+            platforms[i] = Console.ReadLine();
         }
         public object Clone()
         {
@@ -307,8 +313,14 @@ namespace lab6
         }
         public void add()
         {
+            int i;
+            i = 0;
+            while (components[i] != "")
+            {
+                i++;
+            }
             Console.WriteLine("Введите комплектующие");
-            components[components.Length] = Console.ReadLine();
+            components[i] = Console.ReadLine();
         }
     }
 }
