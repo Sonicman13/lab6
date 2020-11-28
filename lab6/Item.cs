@@ -10,7 +10,7 @@ namespace lab6
     {
         void add();
     }
-    class Item
+    abstract class Item
     {
         protected string code;
         protected string name;
@@ -61,13 +61,7 @@ namespace lab6
             this.price = 0;
             this.amount = 0;
         }
-        virtual public void display()
-        {
-            Console.WriteLine("Код товара:" + code);
-            Console.WriteLine("Название товара:" + name);
-            Console.WriteLine("Цена:" + price);
-            Console.WriteLine("Колличество:" + amount);
-        }
+        public abstract void display();
         public int Amount
         {
             set

@@ -11,7 +11,6 @@ namespace lab6
         static void Main(string[] args)
         {
             Store[] store1 = new Store[10];
-            Item[] item1 = new Item[10];
             Game[] game1 = new Game[10];
             Platform[] platform1 = new Platform[10];
             int amountDifference, numberOfItems, i, max, n, numberOfGames, numberOfPlatforms, itemAmount, d;
@@ -37,43 +36,6 @@ namespace lab6
                     name = Console.ReadLine();
                     Console.WriteLine("Введите адрес магазина");
                     adress = Console.ReadLine();
-                    numberOfItems = 0; ;
-                    Console.WriteLine("Добавить товар?(1-да,0-нет)");
-                    f = Console.ReadLine();
-                    while (f == "1")
-                    {
-                        Console.WriteLine("Введите название товара");
-                        itemName = Console.ReadLine();
-                        Console.WriteLine("Введите код товара");
-                        itemCode = Console.ReadLine();
-                        do
-                        {
-                            Console.WriteLine("Введите цену");
-                            try
-                            {
-                                itemPrice = Convert.ToDouble(Console.ReadLine());
-                            }
-                            catch (FormatException){
-                                itemPrice = -1;
-                            }
-                        } while (itemPrice < 0);
-                        do
-                        {
-                            Console.WriteLine("Введите колличество товара");
-                            try
-                            {
-                                itemAmount = Convert.ToInt32(Console.ReadLine());
-                            }
-                            catch (FormatException)
-                            {
-                                itemAmount = -1;
-                            }
-                        } while (itemAmount < 0);
-                        item1[numberOfItems] = new Item(itemName, itemCode, itemPrice, itemAmount);
-                        numberOfItems++;
-                        Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы - нет)");
-                        f = Console.ReadLine();
-                    }
                     numberOfGames = 0;
                     Console.WriteLine("Добавить игру?(1-да,0-нет)");
                     f = Console.ReadLine();
@@ -179,7 +141,7 @@ namespace lab6
                         Console.WriteLine("Добавить еще одну консоль?(1 - да, все остальные символы - нет)");
                         f = Console.ReadLine();
                     }
-                    store1[0] = new Store(name, adress, numberOfItems, item1, numberOfGames, game1, numberOfPlatforms, platform1);
+                    store1[0] = new Store(name, adress, numberOfGames, game1, numberOfPlatforms, platform1);
                 }
                 else if (f == "2")
                 {
