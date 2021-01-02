@@ -81,7 +81,6 @@ namespace lab6
         }
         public void display()
         {
-            int i;
             Console.WriteLine("Название магазина:" + name);
             Console.WriteLine("Адрес:" + adress);
             item.display();
@@ -92,7 +91,6 @@ namespace lab6
         {
             Store newStore = new Store();
             string f;
-            int n;
             newStore.name = store.name;
             newStore.adress = store.adress;
             newStore.item = store.item;
