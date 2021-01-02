@@ -16,7 +16,7 @@ namespace lab6
         protected string name;
         protected double price;
         protected int amount;
-        public void read()
+        virtual public void read()
         {
             Console.WriteLine("Введите название товара");
             name = Console.ReadLine();
@@ -129,8 +129,9 @@ namespace lab6
             }
             this.publisher = publisher;
         }
-        public void read(int d)
+        public override void read()
         {
+            int d;
             Console.WriteLine("Введите название товара");
             name = Console.ReadLine();
             Console.WriteLine("Введите код товара");
@@ -239,8 +240,9 @@ namespace lab6
             }
             this.publisher = publisher;
         }
-        public void read(int d)
+        public override void read()
         {
+            int d;
             Console.WriteLine("Введите название товара");
             name = Console.ReadLine();
             Console.WriteLine("Введите код товара");
@@ -321,6 +323,62 @@ namespace lab6
             }
             Console.WriteLine("Введите комплектующие");
             components[i] = Console.ReadLine();
+        }
+    }
+
+    class Array<T> where T : Item
+    {
+        private T[] it;
+        private int size;
+        public Array()
+        {
+            size = 0;
+        }
+        public Array(T[] o, int size)
+        {
+            it = o;
+            this.size = size;
+        }
+        public void display()
+        {
+            int i;
+            for(i = 0; i< size; i++)
+            {
+                Console.WriteLine("Товар" + i);
+                it[i].display();
+            }
+        }
+        public void Add(T o)
+        {
+            it[size] = o;
+            size++;
+        }
+        public T find(string code)
+        {
+            int i;
+            i = 0;
+            while (i < size)
+            {
+                if (it[i].Code == code)
+                {
+                    return it[i];
+                }
+                i++;
+            }
+            return null;
+        }
+        public Array<T> sum(Array<T> it2)
+        {
+            Array<T> it3 = new Array<T>();
+            int i;
+            it3.it = this.it;
+            it3.size = this.size;
+            for(i = 0; i < it2.size; i++)
+            {
+                it3.it[it3.size] = it2.it[i];
+                it3.size++;
+            }
+            return it3;
         }
     }
 }
