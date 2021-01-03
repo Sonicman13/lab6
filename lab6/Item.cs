@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace lab6
 {
+    public delegate void Cha(int ab, Item item);
     interface Add
     {
         void add();
     }
-    class Item
+    public class Item
     {
         protected string code;
         protected string name;
-        protected double price;
+        protected int price;
         protected int amount;
         virtual public void read()
         {
@@ -27,7 +28,7 @@ namespace lab6
                 Console.WriteLine("Введите цену");
                 try
                 {
-                    price = Convert.ToDouble(Console.ReadLine());
+                    price = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (FormatException)
                 {
@@ -47,7 +48,7 @@ namespace lab6
                 }
             } while (amount < 0);
         }
-        public Item(string code, string name, double price, int amount)
+        public Item(string code, string name, int price, int amount)
         {
             this.name = name;
             this.code = code;
@@ -68,6 +69,10 @@ namespace lab6
             Console.WriteLine("Цена:" + price);
             Console.WriteLine("Колличество:" + amount);
         }
+        static public void setAmount(int amount, Item item)
+        {
+            item.amount = item.amount + amount;
+        }
         public int Amount
         {
             set
@@ -82,7 +87,11 @@ namespace lab6
                 return amount;
             }
         }
-        public double Price
+        static public void setPrice(int price, Item item)
+        {
+            item.price = price;
+        }
+        public int Price
         {
             set
             {
@@ -116,7 +125,7 @@ namespace lab6
             platforms[0] = "-";
             publisher = "-";
         }
-        public Game(string code, string name, double price, int amount, int[] release, string[] platforms, string publisher):base(code, name, price, amount)
+        public Game(string code, string name, int price, int amount, int[] release, string[] platforms, string publisher):base(code, name, price, amount)
         {
             int i;
             for (i = 0; i < 3; i++)
@@ -141,7 +150,7 @@ namespace lab6
                 Console.WriteLine("Введите цену");
                 try
                 {
-                    price = Convert.ToDouble(Console.ReadLine());
+                    price = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (FormatException)
                 {
@@ -227,7 +236,7 @@ namespace lab6
             this.plusPlatforms[0] = "-";
             this.publisher = "-";
         }
-        public Platform(string code, string name, double price, int amount, string[] components, string[] platforms, string publisher):base(code, name, price, amount)
+        public Platform(string code, string name, int price, int amount, string[] components, string[] platforms, string publisher):base(code, name, price, amount)
         {
             int i;
             for (i = 0; i < components.Length; i++)
@@ -252,7 +261,7 @@ namespace lab6
                 Console.WriteLine("Введите цену");
                 try
                 {
-                    price = Convert.ToDouble(Console.ReadLine());
+                    price = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (FormatException)
                 {
@@ -381,4 +390,6 @@ namespace lab6
             return it3;
         }
     }
+
+    
 }

@@ -118,37 +118,7 @@ namespace lab6
             }
             return newStore;
         }
-        public void priceChange(string code, double price)
-        {
-            Item item1;
-            item1 = null;
-            Game game1;
-            game1 = null;
-            Platform platform1;
-            platform1 = null;
-            item1 = item.find(code);
-            if(item1 != null)
-            {
-                item1.Price = price;
-            }
-            if (item1 == null)
-            {
-                game1 = game.find(code);
-                if (game1 != null)
-                {
-                    game1.Price = price;
-                }
-            }
-            if (game1 == null && item1 == null)
-            {
-                platform1 = platform.find(code);
-                if (platform1 != null)
-                {
-                    platform1.Price = price;
-                }
-            }
-        }
-        public void amountChange(string code, int amountDifference)
+        public void Change(string code, int ab, Cha func)
         {
             Item item1;
             item1 = null;
@@ -159,14 +129,14 @@ namespace lab6
             item1 = item.find(code);
             if (item1 != null)
             {
-                item1.Amount = item1.Amount + amountDifference;
+                func(ab, item1);
             }
             if (item1 == null)
             {
                 game1 = game.find(code);
                 if (game1 != null)
                 {
-                    game1.Amount = game1.Amount + amountDifference;
+                    func(ab, game1);
                 }
             }
             if (game1 == null && item1 == null)
@@ -174,7 +144,7 @@ namespace lab6
                 platform1 = platform.find(code);
                 if (platform1 != null)
                 {
-                    platform1.Amount = platform1.Amount + amountDifference;
+                    func(ab, platform1);
                 }
             }
         }
@@ -215,4 +185,6 @@ namespace lab6
             }
         }
     }
+
+    
 }

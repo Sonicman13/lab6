@@ -14,12 +14,11 @@ namespace lab6
             Item[] item1 = new Item[10];
             Game[] game1 = new Game[10];
             Platform[] platform1 = new Platform[10];
-            int amountDifference, numberOfItems, i, max, n, numberOfGames, numberOfPlatforms, itemAmount, d;
+            int amountDifference, numberOfItems, i, max, n, numberOfGames, numberOfPlatforms, itemAmount, d, itemPrice, price;
             int[] release = new int[3];
-            double price;
-            double itemPrice;
             string f, s, code, name, adress, itemCode, itemName, publisher;
             string[] s1 = new string[10], platforms = new string[10], components = new string[10];
+            Cha func;
             Console.WriteLine("Использовать или read чтобы ввести данные(1 - read, все остальные символы - init)");
             f = Console.ReadLine();
             if (f == "1")
@@ -51,7 +50,7 @@ namespace lab6
                             Console.WriteLine("Введите цену");
                             try
                             {
-                                itemPrice = Convert.ToDouble(Console.ReadLine());
+                                itemPrice = Convert.ToInt32(Console.ReadLine());
                             }
                             catch (FormatException){
                                 itemPrice = -1;
@@ -88,7 +87,7 @@ namespace lab6
                             Console.WriteLine("Введите цену");
                             try
                             {
-                                itemPrice = Convert.ToDouble(Console.ReadLine());
+                                itemPrice = Convert.ToInt32(Console.ReadLine());
                             }
                             catch (FormatException)
                             {
@@ -139,7 +138,7 @@ namespace lab6
                             Console.WriteLine("Введите цену");
                             try
                             {
-                                itemPrice = Convert.ToDouble(Console.ReadLine());
+                                itemPrice = Convert.ToInt32(Console.ReadLine());
                             }
                             catch (FormatException)
                             {
@@ -220,6 +219,7 @@ namespace lab6
                 }
                 else if (f == "3")
                 {
+                    func = Item.setPrice;
                     Console.WriteLine("Введите код товара");
                     code = Console.ReadLine();
                     do
@@ -227,17 +227,18 @@ namespace lab6
                         Console.WriteLine("Введите новую цену");
                         try
                         {
-                            price = Convert.ToDouble(Console.ReadLine());
+                            price = Convert.ToInt32(Console.ReadLine());
                         }
                         catch (FormatException)
                         {
                             price = -1;
                         }
                     } while (price < 0);
-                    store1[i].priceChange(code, price);
+                    store1[i].Change(code, price, func);
                 }
                 else if (f == "4")
                 {
+                    func = Item.setAmount;
                     Console.WriteLine("Введите код товара");
                     code = Console.ReadLine();
                     Console.WriteLine("Введите на сколько изменилось колличество товара(если увеличилость - положительное число, если уменьшилось - отрицательное)");
@@ -249,7 +250,7 @@ namespace lab6
                     {
                         amountDifference = 0;
                     }
-                    store1[i].amountChange(code, amountDifference);
+                    store1[i].Change(code, amountDifference, func);
                 }
                 else if (f == "5")
                 {
