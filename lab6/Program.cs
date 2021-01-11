@@ -195,7 +195,7 @@ namespace lab6
             i = 0;
             max = 1;
             f = "1";
-            while (f != "11")
+            while (f != "12")
             {
                 Console.WriteLine("Введите номер следующего действия:");
                 Console.WriteLine("1 - показать информацию о магазине");
@@ -208,7 +208,8 @@ namespace lab6
                 Console.WriteLine("8 - сложить магазины");
                 Console.WriteLine("9 - добавить комплектующие к консоли или платформы на которых доступна игра");
                 Console.WriteLine("10 - копирование");
-                Console.WriteLine("11 - выйти");
+                Console.WriteLine("11 - сортировка по цене");
+                Console.WriteLine("12 - выйти");
                 f = Console.ReadLine();
                 if (f == "1")
                 {
@@ -312,6 +313,10 @@ namespace lab6
                     platform1[1] = platform1[0];
                     platform1[1].Amount = 3;
                     platform1[0].display();
+                }
+                else if(f == "11")
+                {
+                    store1[i].sortA();
                 }
             }
         }

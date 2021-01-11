@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace lab6
 {
@@ -14,11 +15,14 @@ namespace lab6
         private static int maxNumberOfItems = 10;
         private int numberOfGames;
         private int numberOfPlatforms;
-        private Item[] item = new Item[5];
-        private Game[] game = new Game[5];
-        private Platform[] platform = new Platform[5];
+        private List<Item> item = new List<Item>();
+        private List<Game> game = new List<Game>();
+        private List<Platform> platform = new List<Platform>();
         public void read()
         {
+            Item item1;
+            Game game1;
+            Platform platform1;
             string f;
             Console.WriteLine("Введите название магазина");
             name = Console.ReadLine();
@@ -29,8 +33,9 @@ namespace lab6
             f = Console.ReadLine();
             while (f == "1" && numberOfItems < maxNumberOfItems)
             {
-                item[numberOfItems] = new Item();
-                item[numberOfItems].read();
+                item1 = new Item();
+                item1.read();
+                item.Add(item1);
                 numberOfItems++;
                 Console.WriteLine("Добавить еще один товар?(1 - да, все остальные символы -нет)");
                 f = Console.ReadLine();
@@ -40,8 +45,9 @@ namespace lab6
             f = Console.ReadLine();
             while (f == "1")
             {
-                game[numberOfGames] = new Game();
-                game[numberOfGames].read(1);
+                game1 = new Game();
+                game1.read(1);
+                game.Add(game1);
                 numberOfGames++;
                 Console.WriteLine("Добавить еще одну игру?(1 - да, все остальные символы -нет)");
                 f = Console.ReadLine();
@@ -51,8 +57,9 @@ namespace lab6
             f = Console.ReadLine();
             while (f == "1")
             {
-                platform[numberOfPlatforms] = new Platform();
-                platform[numberOfPlatforms].read(1);
+                platform1 = new Platform();
+                platform1.read(1);
+                platform.Add(platform1);
                 numberOfPlatforms++;
                 Console.WriteLine("Добавить еще одну консоль?(1 - да, все остальные символы -нет)");
                 f = Console.ReadLine();
@@ -68,17 +75,17 @@ namespace lab6
                 this.numberOfItems = numberOfItems;
                 for (i = 0; i < this.numberOfItems; i++)
                 {
-                    this.item[i] = item[i];
+                    this.item.Add(item[i]);
                 }
                 this.numberOfGames = numberOfGames;
                 for (i = 0; i < this.numberOfGames; i++)
                 {
-                    this.game[i] = game[i];
+                    this.game.Add(game[i]);
                 }
                 this.numberOfPlatforms = numberOfPlatforms;
                 for (i = 0; i < this.numberOfPlatforms; i++)
                 {
-                    this.platform[i] = platform[i];
+                    this.platform.Add(platform[i]);
                 }
             }
         }
@@ -140,37 +147,37 @@ namespace lab6
                 newStore.numberOfPlatforms = store.numberOfPlatforms;
                 for (n = 0; n < store.numberOfItems; n++)
                 {
-                    newStore.item[n] = new Item();
-                    newStore.item[n] = store.item[n];
+                    newStore.item.Add(store.item[n]);
                 }
                 for (n = 0; n < store.numberOfGames; n++)
                 {
-                    newStore.game[n] = new Game();
-                    newStore.game[n] = store.game[n];
+                    newStore.game.Add(store.game[n]);
                 }
                 for (n = 0; n < store.numberOfPlatforms; n++)
                 {
-                    newStore.platform[n] = new Platform();
-                    newStore.platform[n] = store.platform[n];
+                    newStore.platform.Add(store.platform[n]);
                 }
                 Console.WriteLine("Добавить товар (1), игру (2) или консоль (3)");
                 f = Console.ReadLine();
                 if (f == "1")
                 {
-                    newStore.item[store.numberOfItems] = new Item();
-                    newStore.item[store.numberOfItems].read();
+                    Item item1 = new Item();
+                    item1.read();
+                    newStore.item.Add(item1);
                     newStore.numberOfItems = ++store.numberOfItems;
                 }
                 else if (f == "2")
                 {
-                    newStore.game[store.numberOfGames] = new Game();
-                    newStore.game[store.numberOfGames].read(1);
+                    Game game1 = new Game();
+                    game1.read(1);
+                    newStore.game.Add(game1);
                     newStore.numberOfGames = ++store.numberOfGames;
                 }
                 else
                 {
-                    newStore.platform[store.numberOfPlatforms] = new Platform();
-                    newStore.platform[store.numberOfPlatforms].read(1);
+                    Platform platform1 = new Platform();
+                    platform1.read(1);
+                    newStore.platform.Add(platform1);
                     newStore.numberOfPlatforms = ++store.numberOfPlatforms;
                 }
                 return newStore;
@@ -182,87 +189,55 @@ namespace lab6
         }
         public void priceChange(string code, double price)
         {
-            int i, f;
-            i = f = 0;
-            while (i < numberOfItems)
+            Item item1 = new Item();
+            item1 = item.Find(x => x.Code == code);
+            if(item1 != null)
             {
-                if (item[i].Code == code)
-                {
-                    item[i].Price = price;
-                    i = numberOfItems;
-                    f = 1;
-                }
-                i++;
+                item1.Price = price;
             }
-            if (f == 0)
+            else
             {
-                i = 0;
-                while (i < numberOfGames)
+                Game game1 = new Game(); ;
+                game1 = game.Find(x => x.Code == code);
+                if (game1 != null)
                 {
-                    if (game[i].Code == code)
-                    {
-                        game[i].Price = price;
-                        i = numberOfGames;
-                        f = 1;
-                    }
-                    i++;
+                    game1.Price = price;
                 }
-            }
-            if (f == 0)
-            {
-                i = 0;
-                while (i < numberOfPlatforms)
+                else
                 {
-                    if (platform[i].Code == code)
+                    Platform platform1 = new Platform();
+                    platform1 = platform.Find(x => x.Code == code);
+                    if(platform1 != null)
                     {
-                        platform[i].Price = price;
-                        i = numberOfPlatforms;
-                        f = 1;
+                        platform1.Price = price;
                     }
-                    i++;
                 }
             }
         }
         public void amountChange(string code, int amountDifference)
         {
-            int i, f;
-            i = f = 0;
-            while (i < numberOfItems)
+            Item item1 = new Item();
+            item1 = item.Find(x => x.Code == code);
+            if (item1 != null)
             {
-                if (item[i].Code == code)
-                {
-                    item[i].Amount = item[i].Amount + amountDifference;
-                    i = numberOfItems;
-                    f = 1;
-                }
-                i++;
+                item1.Amount = item1.Amount + amountDifference;
             }
-            if (f == 0)
+            else
             {
-                i = 0;
-                while (i < numberOfGames)
+                Game game1 = new Game(); ;
+                game1 = game.Find(x => x.Code == code);
+                if (game1 != null)
                 {
-                    if (game[i].Code == code)
-                    {
-                        game[i].Amount = game[i].Amount + amountDifference;
-                        i = numberOfGames;
-                        f = 1;
-                    }
-                    i++;
+                    game1.Amount = game1.Amount + amountDifference;
                 }
-            }
-            if (f == 0)
-            {
-                i = 0;
-                while (i < numberOfPlatforms)
+                else
                 {
-                    if (platform[i].Code == code)
+                    Platform platform1 = new Platform();
+                    platform1 = platform.Find(x => x.Code == code);
+                    if (platform1 != null)
                     {
-                        platform[i].Amount = platform[i].Amount + amountDifference;
-                        i = numberOfPlatforms;
-                        f = 1;
+                        platform1.Amount = platform1.Amount + amountDifference;
                     }
-                    i++;
                 }
             }
         }
@@ -288,34 +263,34 @@ namespace lab6
                 newStore.numberOfItems = store1.numberOfItems + store2.numberOfItems;
                 for (n = 0; n < store1.numberOfItems; n++)
                 {
-                    newStore.item[n] = store1.item[n];
+                    newStore.item.Add(store1.item[n]);
                 }
                 i = store1.numberOfItems;
                 for (n = 0; n < store2.numberOfItems; n++)
                 {
-                    newStore.item[i] = store2.item[n];
+                    newStore.item.Add(store2.item[n]);
                     i++;
                 }
                 newStore.numberOfGames = store1.numberOfGames + store2.numberOfGames;
                 for (n = 0; n < store1.numberOfGames; n++)
                 {
-                    newStore.game[n] = store1.game[n];
+                    newStore.game.Add(store1.game[n]);
                 }
                 i = store1.numberOfGames;
                 for (n = 0; n < store2.numberOfGames; n++)
                 {
-                    newStore.game[i] = store2.game[n];
+                    newStore.game.Add(store2.game[n]);
                     i++;
                 }
                 newStore.numberOfPlatforms = store1.numberOfPlatforms + store2.numberOfPlatforms;
                 for (n = 0; n < store1.numberOfPlatforms; n++)
                 {
-                    newStore.platform[n] = store1.platform[n];
+                    newStore.platform.Add(store1.platform[n]);
                 }
                 i = store1.numberOfPlatforms;
                 for (n = 0; n < store2.numberOfPlatforms; n++)
                 {
-                    newStore.platform[i] = store2.platform[n];
+                    newStore.platform.Add(store2.platform[n]);
                     i++;
                 }
                 return newStore;
@@ -339,31 +314,40 @@ namespace lab6
         }
         public void add(string code)
         {
-            int i, f;
-            i = f = 0;
-            while (i < numberOfGames)
+            Game game1 = new Game(); ;
+            game1 = game.Find(x => x.Code == code);
+            if (game1 != null)
             {
-                if (game[i].Code == code)
-                {
-                    game[i].add();
-                    i = numberOfGames;
-                    f = 1;
-                }
-                i++;
+                game1.add();
             }
-            if (f == 0)
+            else
             {
-                i = 0;
-                while (i < numberOfPlatforms)
+                Platform platform1 = new Platform();
+                platform1 = platform.Find(x => x.Code == code);
+                if (platform1 != null)
                 {
-                    if (platform[i].Code == code)
-                    {
-                        platform[i].add();
-                        i = numberOfPlatforms;
-                        f = 1;
-                    }
-                    i++;
+                    platform1.add();
                 }
+            }
+        }
+        public void sortA()
+        {
+            string f;
+            Console.WriteLine("Сортировать по возростанию(1) или по убыванию(2)");
+            f = Console.ReadLine();
+            if(f == "1")
+            {
+                ItemCompare nc = new ItemCompare();
+                item.Sort(nc);
+                game.Sort(nc);
+                platform.Sort(nc);
+            }
+            else
+            {
+                ItemCompare1 nc1 = new ItemCompare1();
+                item.Sort(nc1);
+                game.Sort(nc1);
+                platform.Sort(nc1);
             }
         }
     }

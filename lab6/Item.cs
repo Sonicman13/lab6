@@ -3,12 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace lab6
 {
     interface Add
     {
         void add();
+    }
+    class ItemCompare: IComparer<Item>
+    {
+        public int Compare(Item x0, Item y0)
+        {
+            double t1, t2;
+            t1 = x0.Price;
+            t2 = y0.Price;
+            if (t1 > t2)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+    class ItemCompare1: IComparer<Item>
+    {
+        public int Compare(Item x0, Item y0)
+        {
+            double t1, t2;
+            t1 = x0.Price;
+            t2 = y0.Price;
+            if (t1 < t2)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
     }
     class Item
     {
@@ -90,6 +125,10 @@ namespace lab6
                 {
                     price = value;
                 }
+            }
+            get
+            {
+                return price;
             }
         }
         public string Code
