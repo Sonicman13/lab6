@@ -337,14 +337,14 @@ namespace lab6
             f = Console.ReadLine();
             if(f == "1")
             {
-                ItemCompare nc = new ItemCompare();
+                ItemCompare1 nc = new ItemCompare1();
                 item.Sort(nc);
                 game.Sort(nc);
                 platform.Sort(nc);
             }
             else
             {
-                ItemCompare1 nc1 = new ItemCompare1();
+                ItemCompare nc1 = new ItemCompare();
                 item.Sort(nc1);
                 game.Sort(nc1);
                 platform.Sort(nc1);
